@@ -80,7 +80,7 @@ export default function Sidemenu({ activePage, setActivePage }) {
                             <Adviser data={adData} />
                     </Box>
             ): (
-                <Box position={'absolute'} left="0" bottom="0" w='100%' h='60px'>
+                <Box bg={'white'} position={'absolute'} left="0" bottom="0" w='100%' h='60px'>
                     <Box h='100%'>
                         <List display={'flex'} h='100%' alignItems={'center'} justifyContent={'space-around'}>
                             <ListItem 
