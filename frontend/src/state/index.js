@@ -14,8 +14,10 @@ export const homeSlice = createSlice({
             state.token = action.payload.token
             state.user = action.payload.user
         },
-        setLogout: (state, action) => {
+        setLogout: (state) => {
+            state.token = null
             state.user = null
+            console.log(state.user, state.token)
         },
         Refresh: (state, action) => {
             state.refresh = []

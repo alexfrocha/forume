@@ -13,13 +13,11 @@ export default function Navbar() {
                 {isNonMobileScreens ? 
                 (    
                 <>
-                    <Search />
                     <UserMenu />
                 </>
                 ) : (
                     <>
                         <Box display={'flex'} alignItems={'center'}>
-                            <Search />
                             <UserMenu />
                         </Box>
                     </>

@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from "@chakra-ui/react";
+import { Box, Highlight, useMediaQuery } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
@@ -6,9 +6,10 @@ import Post from "../components/Post";
 import { AnimatePresence, motion } from 'framer-motion'
 import NewTopic from "../components/NewTopic";
 
-export default function Posts() {
+export default function Posts({ isProfile, profileId }) {
 
     const [cookies, setCookie] = useCookies(['auth', 'token'])
+    const [profile, setProfile] = useState({})
 
     const getPosts = async () => {
         const reponse = await fetch(`http://localhost:3001/posts`, {
@@ -19,7 +20,28 @@ export default function Posts() {
         }) 
         const data = await reponse.json()
         setPosts(data)
-        console.log(data)
+    }
+
+    const getPostsByProfile = async () => {
+        const response = await fetch(`http://localhost:3001/posts/${profileId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        const data = await response.json()
+        setPosts(data)
+    }
+
+    const getUser = async () => {
+        const response = await fetch(`http://localhost:3001/users/${profileId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        const data = await response.json()
+        setProfile(data)
     }
 
     const listRef = useRef(null)
@@ -29,8 +51,12 @@ export default function Posts() {
     const refresh = useSelector((state) => state.refresh)
 
     useMemo(() => {
-        getPosts()
-    }, [refresh])
+        if(isProfile) {
+            getPostsByProfile()
+            getUser()
+        }
+        else getPosts()
+    }, [isProfile ? profileId : refresh])
 
     useEffect(() => {
         if(listRef.current) {
@@ -48,15 +74,29 @@ export default function Posts() {
                 display: 'none'
             }
         }}>
+            
             <AnimatePresence>
-                {posts.map(post => (
+                { isProfile && (
+                    <Box fontSize={'20px'} textAlign={'center'} my={3}>
+                        <Highlight 
+                        styles={{
+                            color: 'main700',
+                            fontWeight: '700'
+                        }}
+                        query={[`${profile.firstName}`, `${profile.lastName}`]}>
+                            {`Tópicos do usuário ${profile.firstName} ${profile.lastName}`}
+                        </Highlight>
+                    </Box>
+
+                )}
+                {posts.slice(0).reverse().map(post => (
                     <motion.div
                         key={post._id}
                         initial={{ opacity: 0, y: -50 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 50 }}
                     >
-                        <Post data={post} />
+                        <Post isProfile={true} data={post} />
                     </motion.div>
                 ))}
             </AnimatePresence>

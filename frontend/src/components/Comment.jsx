@@ -74,7 +74,7 @@ export default function Comment({ data }) {
             <HStack display={'flex'} justifyContent={'space-between'} w='100%'>
                 <HStack>
                     <Avatar w={'25px'} h={'25px'} icon={<AiOutlineUser />} />
-                    <Text _hover={{ cursor: 'pointer' }} onClick={() => navigate('/profile/')} fontWeight={'700'} color={'main700'} fontSize='14px'>{`${data.author.firstName} ${data.author.lastName}`}</Text>
+                    <Text _hover={{ cursor: 'pointer' }} onClick={() => navigate('/topics/' + data.author._id)} fontWeight={'700'} color={'main700'} fontSize='14px'>{`${data.author.firstName} ${data.author.lastName}`}</Text>
                 </HStack>
                 {
                     user && 

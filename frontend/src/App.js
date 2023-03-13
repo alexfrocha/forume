@@ -3,6 +3,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Home from './scenes/home';
 import PostHome from './scenes/post';
 import PostPage from './scenes/post';
+import TopicsPage from './scenes/topics';
 
 const customTheme = extendTheme({
   fonts: {
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/post/:postId' element={<PostPage />} />
+          <Route path='/topics/:profileId' element={<TopicsPage />} />
         </Routes>
       </ChakraProvider>
     </BrowserRouter>

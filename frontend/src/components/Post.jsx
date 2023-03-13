@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import ErrorLogarModal from "./ErrorLogarModal";
 
-export default function Post({ data, unique=false }) {
+export default function Post({ data, unique=false, isProfile=false }) {
     const user = useSelector((state) => state.user)
     const [cookies, setCookie] = useCookies(['auth', 'token'])
     const dispatch = useDispatch()
@@ -118,10 +118,11 @@ export default function Post({ data, unique=false }) {
                                     <MdDeleteOutline fontSize={'20px'} />
                                 </Button>
                             ): (
-                                
-                            <Tooltip label={`${data.author.firstName} ${data.author.lastName}`}>  
-                                <Avatar _hover={{ cursor: 'pointer' }} size={'sm'} src={`http://localhost:3001/assets/${data.author.picturePath}`} icon={<AiOutlineUser fontSize={'.8rem'} />} />
-                            </Tooltip>
+                                <Box onClick={() => {navigate(`/topics/${data.author._id}`)}} > 
+                                    <Tooltip label={`${data.author.firstName} ${data.author.lastName}`}>  
+                                        <Avatar _hover={{ cursor: 'pointer' }} size={'sm'} src={`http://localhost:3001/assets/${data.author.picturePath}`} icon={<AiOutlineUser fontSize={'.8rem'} />} />
+                                    </Tooltip>
+                                </Box>
                             )}
                         </>
                         )
@@ -145,16 +146,19 @@ export default function Post({ data, unique=false }) {
                     <div dangerouslySetInnerHTML={{ __html: data.content }} />
                 </Text>
                 {!unique && (
-                    <HStack w={'100%'} display={'flex'} justifyContent='space-between'>
-                    <Box display={'flex'} color={'darkText'} fontSize={'14px'} alignItems='center'>
-                        <Avatar icon={<AiOutlineUser fontSize={'1rem'} />} size={'sm'} mr={2} />
-                        <Highlight styles={{
-                            color: 'main700',
-                            fontWeight: '700',
-                            marginLeft: '3px'
-                        }} query={`${data.author.firstName} ${data.author.lastName}`}>{`Postado por ${data.author.firstName} ${data.author.lastName}`}</Highlight>
-                    </Box>
-                    <Button onClick={() => navigate(`/post/${data._id}`)} color={'darkText'} _hover={{
+                    <HStack w={'100%'} display={'flex'} flexDirection={isProfile ? 'column' : 'row'}>
+                    {!isProfile && (
+                        <Box display={'flex'} color={'darkText'} fontSize={'14px'} alignItems='center'>
+                            <Avatar icon={<AiOutlineUser fontSize={'1rem'} />} size={'sm'} mr={2} />
+                            <Highlight styles={{
+                                color: 'main700',
+                                fontWeight: '700',
+                                marginLeft: '3px'
+                                }} query={`${data.author.firstName} ${data.author.lastName}`}>{`Postado por ${data.author.firstName} ${data.author.lastName}`}</Highlight>
+                        </Box>
+                    )}
+
+                    <Button alignSelf={'flex-end'} onClick={() => navigate(`/post/${data._id}`)} color={'darkText'} _hover={{
                         color: 'darkTitle'
                     }} variant={'ghost'}>
                         <HStack>
@@ -162,6 +166,7 @@ export default function Post({ data, unique=false }) {
                             <Text>{data.comments.length}</Text>
                         </HStack>
                     </Button>
+
                 </HStack>
                 )}
             </Box>

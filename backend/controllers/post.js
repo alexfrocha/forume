@@ -33,9 +33,14 @@ export const getPostsByProfile = async (req, res) => {
     try {
         const { _id } = req.params
         const posts = await Post.find({ author: _id }).lean().exec()
-        const comments = await Comment.find({ _id : { $in: posts.comments } }).lean().exec()
-        posts.comments = comments
-        res.status(200).json(posts)
+        const updatedPosts = await Promise.all(posts.map(async post => {
+            const comments = await Comment.find({ _id : { $in: post.comments } }).lean().exec()
+            const user = await User.findOne({ _id: {$in: post.author}})
+            post.comments = comments
+            post.author = user
+            return post
+        }))
+        res.status(200).json(updatedPosts)
     } catch (err) { res.status(500).json({ error: err.message }) }
 }
 
