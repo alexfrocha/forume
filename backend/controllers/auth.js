@@ -11,6 +11,7 @@ export const createAccount = async (req, res) => {
             password
         } = req.body
 
+        const emailLowerCase = String(email).toLowerCase()
 
         const salt = await bcrypt.genSalt()
         const passwordHash = await bcrypt.hash(password, salt)
@@ -18,7 +19,7 @@ export const createAccount = async (req, res) => {
         const newUser = new User({
             firstName,
             lastName,
-            email,
+            email: emailLowerCase,
             password: passwordHash
         })
 
@@ -40,6 +41,6 @@ export const loginAccount = async (req, res) => {
         if(!bcrypt.compare(password, someUserWithSameEmail.password)) return res.status(404).json({ errorMessage: 'Senha inválida' })
         const token = jwt.sign({ id: someUserWithSameEmail.id }, process.env.JWT_SECRET)
         delete someUserWithSameEmail.password
-        res.status(200).json({ token, someUserWithSameEmail })
+        res.status(200).json({ token, user: someUserWithSameEmail })
     } catch (err) { res.status(500).json({ error: err.message })}
 }

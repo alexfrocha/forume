@@ -1,10 +1,22 @@
 import mongoose from "mongoose";
 
 const UserSchema = mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     picturePath: {
         type: String,
         default: ''
@@ -13,6 +25,11 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post"
     }]
+})
+
+UserSchema.pre('remove', async function(next) {
+    await this.model('Post').deleteMany({ author: this._id })
+    next()
 })
 
 const User = mongoose.model("User", UserSchema);

@@ -27,5 +27,11 @@ const PostSchema = mongoose.Schema({
     }]
 })
 
+
+PostSchema.pre('remove', async function(next) {
+    await this.model('Comment').deleteMany({ parentPost: this._id })
+    next()
+})
+
 const Post = mongoose.model('Post', PostSchema)
 export default Post
