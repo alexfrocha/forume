@@ -16,7 +16,7 @@ export default function UniquePost({ postId }) {
     const refresh = useSelector((state) => state.refresh)
 
     const getPost = async () => {
-        const response = await fetch(`http://localhost:3001/posts/one/${postId}`, {
+        const response = await fetch(`https://api-forume.herokuapp.com/posts/one/${postId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ export default function UniquePost({ postId }) {
     }
 
     const getComments = async () => {
-        const response = await fetch(`http://localhost:3001/comments/${postId}`, {
+        const response = await fetch(`https://api-forume.herokuapp.com/comments/${postId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ export default function Form({ onClose }) {
     const isRegister = pageType ==='register'
     
     const register = async () => {
-        const response = await fetch('http://localhost:3001/auth/create', {
+        const response = await fetch('https://api-forume.herokuapp.com/auth/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export default function Form({ onClose }) {
 
     const login = async () => {
         const emailLowerCase = formValues.email.toLowerCase()
-        const loggedIn = await fetch('http://localhost:3001/auth/login', {
+        const loggedIn = await fetch('https://api-forume.herokuapp.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -26,7 +26,7 @@ export default function CreateCommentModal({ isOpen, onOpen, onClose, postId }) 
             }, 5000);
             return
         }
-        const response = await fetch(`http://localhost:3001/comments/create`, {
+        const response = await fetch(`https://api-forume.herokuapp.com/comments/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json",

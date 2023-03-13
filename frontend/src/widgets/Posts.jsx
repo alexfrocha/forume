@@ -12,7 +12,7 @@ export default function Posts({ isProfile, profileId }) {
     const [profile, setProfile] = useState({})
 
     const getPosts = async () => {
-        const reponse = await fetch(`http://localhost:3001/posts`, {
+        const reponse = await fetch(`https://api-forume.herokuapp.com/posts`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default function Posts({ isProfile, profileId }) {
     }
 
     const getPostsByProfile = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${profileId}`, {
+        const response = await fetch(`https://api-forume.herokuapp.com/posts/${profileId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default function Posts({ isProfile, profileId }) {
     }
 
     const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${profileId}`, {
+        const response = await fetch(`https://api-forume.herokuapp.com/users/${profileId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

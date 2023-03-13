@@ -17,7 +17,7 @@ export default function Post({ data, unique=false, isProfile=false }) {
     const [showError, setShowError] = useState(false)
     const [isNonMobileScreens] = useMediaQuery('(min-width: 1000px)')
     const likePost = async (data) => {
-        const response = await fetch('http://localhost:3001/posts/like', {
+        const response = await fetch('https://api-forume.herokuapp.com/posts/like', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export default function Post({ data, unique=false, isProfile=false }) {
     
 
     const deslikePost = async (data) => {
-        const response = await fetch('http://localhost:3001/posts/deslike', {
+        const response = await fetch('https://api-forume.herokuapp.com/posts/deslike', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export default function Post({ data, unique=false, isProfile=false }) {
     }
 
     const removePost = async () => {
-        const response = await fetch('http://localhost:3001/posts/delete/' + data._id, {
+        const response = await fetch('https://api-forume.herokuapp.com/posts/delete/' + data._id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export default function Post({ data, unique=false, isProfile=false }) {
                             ): (
                                 <Box onClick={() => {navigate(`/topics/${data.author._id}`)}} > 
                                     <Tooltip label={`${data.author.firstName} ${data.author.lastName}`}>  
-                                        <Avatar _hover={{ cursor: 'pointer' }} size={'sm'} src={`http://localhost:3001/assets/${data.author.picturePath}`} icon={<AiOutlineUser fontSize={'.8rem'} />} />
+                                        <Avatar _hover={{ cursor: 'pointer' }} size={'sm'} src={`https://api-forume.herokuapp.com/assets/${data.author.picturePath}`} icon={<AiOutlineUser fontSize={'.8rem'} />} />
                                     </Tooltip>
                                 </Box>
                             )}
@@ -132,7 +132,7 @@ export default function Post({ data, unique=false, isProfile=false }) {
                     {
                         !user && unique ? (
                             <Tooltip label={`${data.author.firstName} ${data.author.lastName}`}>  
-                                <Avatar _hover={{ cursor: 'pointer' }} size={'sm'} src={`http://localhost:3001/assets/${data.author.picturePath}`} icon={<AiOutlineUser fontSize={'.8rem'} />} />
+                                <Avatar _hover={{ cursor: 'pointer' }} size={'sm'} src={`https://api-forume.herokuapp.com/assets/${data.author.picturePath}`} icon={<AiOutlineUser fontSize={'.8rem'} />} />
                             </Tooltip>
                         ) : (
                             <>

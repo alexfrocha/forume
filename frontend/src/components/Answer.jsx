@@ -16,7 +16,7 @@ export default function Answer({ data }) {
 
     
     const removeAnswer = async () => {
-        const response = await fetch(`http://localhost:3001/comments/answer/delete/${data._id}`, {
+        const response = await fetch(`https://api-forume.herokuapp.com/comments/answer/delete/${data._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export default function Answer({ data }) {
     }
 
     const likeComment = async (data) => {
-        const response = await fetch('http://localhost:3001/comments/like', {
+        const response = await fetch('https://api-forume.herokuapp.com/comments/like', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export default function Answer({ data }) {
     
 
     const deslikeComment = async (data) => {
-        const response = await fetch('http://localhost:3001/comments/deslike', {
+        const response = await fetch('https://api-forume.herokuapp.com/comments/deslike', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
