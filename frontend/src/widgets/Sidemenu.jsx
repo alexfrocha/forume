@@ -6,6 +6,7 @@ import Adviser from "../components/Adviser";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ErrorLogarModal from "../components/ErrorLogarModal";
+import NewTopic from "../components/NewTopic";
 
 export default function Sidemenu({ activePage, setActivePage }) {
 
@@ -80,9 +81,10 @@ export default function Sidemenu({ activePage, setActivePage }) {
                             <Adviser data={adData} />
                     </Box>
             ): (
-                <Box bg={'white'} position={'absolute'} left="0" bottom="0" w='100%' h='60px'>
+                <Box bg={'white'} boxShadow={'sm'} zIndex={2} position={'absolute'} left="0" bottom="0" w='100%' h='60px'>
                     <Box h='100%'>
                         <List display={'flex'} h='100%' alignItems={'center'} justifyContent={'space-around'}>
+                            <NewTopic isMobile={true} />
                             <ListItem 
                             borderBottomWidth='3px'
                             paddingBottom={1}
@@ -94,7 +96,7 @@ export default function Sidemenu({ activePage, setActivePage }) {
                             borderBottomColor={activePage === 'home' ? 'main700' : 'white'}
                             display={'flex'} flexDirection='column' justifyContent={'center'} alignItems={'center'}>
                                 <ListIcon sx={{ color: activePage === 'home' ? 'main700' : 'darkText' }} as={VscHome} fontSize={'20px'} />
-                                <Text sx={{ color: activePage === 'home' ? 'main700' : 'darkText' }} fontSize={'14px'} fontWeight={'500'}>Página Inicial</Text>
+                                <Text sx={{ color: activePage === 'home' ? 'main700' : 'darkText' }} fontSize={'14px'} fontWeight={'500'}>Início</Text>
                             </ListItem>
 
                             <ListItem 

@@ -27,7 +27,6 @@ export default function PostPage() {
                     <Box overflowY={'scroll'} flexBasis={isNonMobileScreens ? '48%' : undefined} mr={isNonMobileScreens && '5rem'}>
                         {!isNonMobileScreens && (
                             <>
-                                <NewTopic />
                                 <Box mb={3}></Box>
                             </>
                         )}

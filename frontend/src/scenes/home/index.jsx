@@ -24,7 +24,7 @@ export default function Home() {
                     <Box flexBasis={isNonMobileScreens ? '48%' : undefined} mr={isNonMobileScreens && '5rem'}>
                         {!isNonMobileScreens && (
                             <>
-                                <NewTopic />
+                                {/* <NewTopic /> */}
                                 <Box mb={3}></Box>
                             </>
                         )}
