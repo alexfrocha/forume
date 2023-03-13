@@ -21,7 +21,7 @@ export default function UserMenu() {
                 <Menu>
                     <MenuButton>
                         <AvatarGroup>
-                            <Avatar size={'md'} icon={<AiOutlineUser fontSize={'1.5rem'} />} />
+                            <Avatar size={'sm'} icon={<AiOutlineUser fontSize={'1rem'} />} />
                         </AvatarGroup>
                     </MenuButton>
                     <MenuList>
