@@ -53,7 +53,6 @@ O fórum MERN inclui as seguintes funcionalidades:
 
 Criação de tópicos: os usuários podem criar novos tópicos com um título e uma descrição  <br>
 Adição de comentários: os usuários podem adicionar comentários em um tópico existente <br>
-Pesquisa de tópicos: os usuários podem pesquisar tópicos por palavra-chave ou tag <br>
 Listagem de tópicos: os usuários podem ver uma lista de todos os tópicos, ordenados por data de criação <br>
 ### Contribuição
 Se você quiser contribuir para o projeto, sinta-se à vontade para enviar um pull request. Certifique-se de seguir as boas práticas de programação e incluir testes automatizados para suas alterações.
